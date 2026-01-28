@@ -6,136 +6,157 @@
     <title>OverTheWire: Bandit Solutions by SPORIME</title>
     <link rel="stylesheet" href="style.css">
 </head>
- <style>
-        :root {
-            --bg-dark: #0d1117;
-            --sidebar-bg: #161b22;
-            --accent-green: #238636;
-            --terminal-black: #010409;
-            --text-main: #c9d1d9;
-            --text-dim: #8b949e;
-            --border-color: #30363d;
-        }
+<style>
+    :root {
+        --bg-dark: #0d1117;
+        --sidebar-bg: #161b22;
+        --accent-green: #238636;
+        --terminal-black: #010409;
+        --text-main: #c9d1d9;
+        --text-dim: #8b949e;
+        --border-color: #30363d;
+    }
 
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        margin: 0;
+        display: flex;
+        flex-direction: row; /* Desktop default */
+    }
+
+    /* Sidebar Styling */
+    nav {
+        width: 250px;
+        height: 100vh;
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--border-color);
+        position: fixed;
+        overflow-y: auto;
+        z-index: 100;
+    }
+
+    .nav-header {
+        padding: 20px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: white;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+        display: block;
+        padding: 12px 20px;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+        background-color: #21262d;
+        color: white;
+        border-left: 4px solid var(--accent-green);
+    }
+
+    /* Main Content */
+    main {
+        margin-left: 250px; /* Offset for sidebar */
+        padding: 40px;
+        max-width: 900px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .level-header {
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+
+    h2 { color: white; }
+
+    /* Terminal Component */
+    .terminal-card {
+        background-color: var(--terminal-black);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .terminal-header {
+        background-color: #161b22;
+        padding: 8px 15px;
+        display: flex;
+        gap: 8px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .red { background: #ff5f56; }
+    .yellow { background: #ffbd2e; }
+    .green { background: #27c93f; }
+
+    .terminal-body {
+        padding: 15px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        overflow-x: auto; /* Handle long commands on mobile */
+    }
+
+    .command { color: #58a6ff; }
+    .output { color: #d1d5da; white-space: pre-wrap; display: block; margin-top: 5px; }
+    .prompt { color: var(--accent-green); font-weight: bold; }
+
+    .label { font-size: 0.8rem; color: white; margin-bottom: 8px; display: block; }
+    .descrip { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 8px; display: block; }
+    .hidden { display: none; }
+
+    /* RESPONSIVE BREAKPOINT */
+    @media (max-width: 768px) {
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            display: flex;
+            flex-direction: column;
         }
 
-        /* Sidebar Styling */
         nav {
-            width: 250px;
-            height: 100vh;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            position: fixed;
-            overflow-y: auto;
+            width: 100%;
+            height: auto;
+            max-height: 200px; /* Allow scrolling within the nav area */
+            position: relative;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        main {
+            margin-left: 0;
+            padding: 20px;
         }
 
         .nav-header {
-            padding: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: white;
-            border-bottom: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        #level-links {
+            display: flex;
+            overflow-x: auto; /* Scroll levels horizontally on mobile */
+            white-space: nowrap;
         }
 
         nav a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-dim);
-            text-decoration: none;
-            transition: 0.2s;
+            display: inline-block;
+            border-left: none !important;
+            border-bottom: 3px solid transparent;
         }
 
         nav a:hover, nav a.active {
-            background-color: #21262d;
-            color: white;
-            border-left: 4px solid var(--accent-green);
+            border-bottom: 3px solid var(--accent-green);
         }
-
-        /* Main Content */
-        main {
-            margin-left: 250px;
-            padding: 40px;
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .level-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        h2 { color: white; }
-
-        /* Terminal Component */
-        .terminal-card {
-            background-color: var(--terminal-black);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .terminal-header {
-            background-color: #161b22;
-            padding: 8px 15px;
-            display: flex;
-            gap: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-
-        .terminal-body {
-            padding: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .command { color: #58a6ff; }
-        .output { color: #d1d5da; white-space: pre-wrap; }
-        .prompt { color: var(--accent-green); font-weight: bold; }
-
-        .label {
-            font-size: 0.8rem;
-            color: white;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .descrip {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            display: block;
-        }
-        .hidden { display: none; }
-
-        /* Add active state for sidebar */
-        nav a.active {
-            background-color: #21262d;
-            color: white;
-            border-left: 4px solid var(--accent-green);
-        }
-
-        /* Ensure output preserves line breaks from your solutions.js */
-        .output { 
-            display: block;
-            margin-top: 5px;
-            white-space: pre-wrap; 
-        }
-    </style>
+    }
+</style>
 <body>
 
     <nav id="sidebar">

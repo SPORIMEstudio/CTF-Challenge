@@ -89,6 +89,5 @@ bandit0@bandit.labs.overthewire.org's password:bandit0` },
             { label: "Command explanation",description:"",dir:"",command:". search the current working directory -type f looks for files only -size 1033c look for file that are 1033 bytes c represent bytes -not -executable find only one not executable file  -exec file{} execuate the file command on all results {} placedhlder for the location where the names of files found + for terminate grep command to  find pattrens in string its like search", output: "" },
             { label: "Read file",description:"",dir:"bandit5@bandit:~/inhere$",command:"cat ./maybehere07/.file2",output:"HWasnPhtq9AVKe0dmk45nxy20cvUa6EG"}
         ]
-    },
-    
+    }
 ];
