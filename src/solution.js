@@ -38,7 +38,7 @@ bandit0@bandit.labs.overthewire.org's password:bandit0` },
         steps: [
             { label: "Put password that you get in level0",description:"",dir:"$",command: "ssh bandit1@bandit.labs.overthewire.org -p 2220", output: "bandit1@bandit.labs.overthewire.org's password:" },
             { label: "Ls to check file in directory",description:"",dir:"bandit1@bandit:~$",command: "ls", output: "-" },
-            { label: "Read hyphenated file",description:"",dir:"bandit1@bandit:~$",command: "cat ./-", output: "263JGJPfgU6LtdEvgfWU1XP5yac29mFx" },
+            { label: "Read hyphenated file",description:"",dir:"c",command: "cat ./-", output: "263JGJPfgU6LtdEvgfWU1XP5yac29mFx" },
             { label: "Why we use ./ insetad simple cat -",description:"",dir:"",command: "You can use simple 'cat -' and see what happen. if you use hypen linux think you are going to type command so it give balnk line to put input but you want to read file thats why we use ./ to tell linux the written hypen is file name not command", output: "Let's move on next level" }
         ]
     },
@@ -79,7 +79,7 @@ bandit0@bandit.labs.overthewire.org's password:bandit0` },
     {
         id: "level5",
         title: "Level 5 → Level 6",
-        goal: "The password for next level is stored in file somewhere ubnder the inhere directory and has all of the following\n\nProperties:\nhumane-readable\n1033 bytes in size\nnot executable.",
+        goal: "The password for next level is stored in file somewhere under the inhere directory and has all of the following\n\nProperties:\nhumane-readable\n1033 bytes in size\nnot executable.",
         steps: [
             { label: "Put password that you get in level4",description:"",dir:"$",command: "ssh bandit5@bandit.labs.overthewire.org -p 2220", output: "bandit5@bandit.labs.overthewire.org's password:" },
             { label: "Use cd command",description:"Use cd command to change directory to 'inhere' as given in instruction",dir:"bandit5@bandit:~$",command: "cd inhere", output: "" },
@@ -89,5 +89,25 @@ bandit0@bandit.labs.overthewire.org's password:bandit0` },
             { label: "Command explanation",description:"",dir:"",command:". search the current working directory -type f looks for files only -size 1033c look for file that are 1033 bytes c represent bytes -not -executable find only one not executable file  -exec file{} execuate the file command on all results {} placedhlder for the location where the names of files found + for terminate grep command to  find pattrens in string its like search", output: "" },
             { label: "Read file",description:"",dir:"bandit5@bandit:~/inhere$",command:"cat ./maybehere07/.file2",output:"HWasnPhtq9AVKe0dmk45nxy20cvUa6EG"}
         ]
-    }
+    },
+    {
+        id: "level6",
+        title: "Level 6 → Level 7",
+        goal: "The password for next level is stored somewhere on the server and has all of the properties:\n\nowned by user bandit7\nowned by group 6\n 33 bytes in size.",
+        steps: [
+            { label: "Put password that you get in level5",description:"",dir:"$",command: "ssh bandit6@bandit.labs.overthewire.org -p 2220", output: "bandit6@bandit.labs.overthewire.org's password:" },
+            { label: "Use find command",description:"I use find command. what you need to understand is 2>/dev/null this command remove other stuff",dir:"bandit6@bandit:~$",command:"find / -user bandit7 -group bandit6 -size 33c 2>/dev/null", output: "/var/lib/dpkg/info/bandit7.password" },
+            { label: "Use cat command",description:"",dir:"bandit6@bandit:~$",command:"cat /var/lib/dpkg/info/bandit7.password", output: "morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj" }
+            
+        ]
+    },
+    {
+        id: "level7",
+        title: "Level 7 → Level 8",
+        goal: "The password for next level is stored in the file data.txt next to the word millionth",
+        steps: [
+            { label: "Put password that you get in level6",description:"",dir:"$",command: "ssh bandit7@bandit.labs.overthewire.org -p 2220", output: "bandit7@bandit.labs.overthewire.org's password:" },
+            { label: "Use cat command",description:"simple",dir:"bandit7@bandit:~$",command:"cat data.txt | grep millionth", output: "dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc" }            
+        ]
+    },
 ];
