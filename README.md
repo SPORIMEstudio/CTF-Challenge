@@ -48,6 +48,8 @@ The current `solution.js` covers the following concepts:
 * **Level 3:** Finding hidden files (ls -a).
 * **Level 4:** Using the file command to identify human-readable data.
 * **Level 5:** Advanced find command usage (filtering by size and properties)
+* **Level 6:** Searching the entire file system using specific user, group, and size filters.
+* **Level 7:** Using grep to find a specific password located next to a keyword in a large file.
 
 > [!NOTE]
 > I made this repository to save my data and also help others. If you find something wrong, you should Google it—the methods and commands I used can be applied in many different ways!
