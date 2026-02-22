@@ -110,4 +110,31 @@ bandit0@bandit.labs.overthewire.org's password:bandit0` },
             { label: "Use cat command",description:"simple",dir:"bandit7@bandit:~$",command:"cat data.txt | grep millionth", output: "dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc" }            
         ]
     },
+    {
+        id: "level8",
+        title: "Level 8 → Level 9",
+        goal: "The password for next level is stored in the file data.txt and is the only line of text that occurs only once",
+        steps: [
+            { label: "Put password that you get in level7",description:"Read Piping and Redirection",dir:"$",command: "ssh bandit8@bandit.labs.overthewire.org -p 2220", output: "bandit8@bandit.labs.overthewire.org's password:" },
+            { label: "Use cat with sort and uniq command",description:"",dir:"bandit8@bandit:~$",command:"cat data.txt \| sort \| uniq -u", output: "4CKMh1JI91bUIZZPXDqGanal4xvAg0JM" }            
+        ]
+    },
+    {
+        id: "level9",
+        title: "Level 9 → Level 10",
+        goal: "The password for next level is stored in the file data.txt in one of the few human-readable strings,preceded by several = characters",
+        steps: [
+            { label: "Put password that you get in level8",description:"",dir:"$",command: "ssh bandit9@bandit.labs.overthewire.org -p 2220", output: "bandit9@bandit.labs.overthewire.org's password:" },
+            { label: "Use cat with strings and grep command",description:"",dir:"bandit9@bandit:~$",command:"cat data.txt \| strings -e s \| grep ===", output: "FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey" }           
+        ]
+    },
+    {
+        id: "level10",
+        title: "Level 10 → Level 11",
+        goal: "The password for next level is stored in the file data.txt which contain base64 encoded data",
+        steps: [
+            { label: "Put password that you get in level9",description:"",dir:"$",command: "ssh bandit10@bandit.labs.overthewire.org -p 2220", output: "bandit10@bandit.labs.overthewire.org's password:" },
+            { label: "Use cat with base64 -d command",description:"I use base64 -d to decode file",dir:"bandit10@bandit:~$",command:"cat data.txt \| base64 -d", output: "dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr"}           
+        ]
+    }
 ];
