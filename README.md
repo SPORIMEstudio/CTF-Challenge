@@ -39,7 +39,7 @@ Because the site is data-driven, you can adapt it for any CTF or tutorial series
     ]
 }
 ```
-## 🎮 Current Progress: Bandit 0 ➞ 5
+## 🎮 Current Progress: Bandit 0 ➞ 10
 The current `solution.js` covers the following concepts:
 
 * **Level 0:** SSH connection basics.
@@ -50,6 +50,9 @@ The current `solution.js` covers the following concepts:
 * **Level 5:** Advanced find command usage (filtering by size and properties)
 * **Level 6:** Searching the entire file system using specific user, group, and size filters.
 * **Level 7:** Using grep to find a specific password located next to a keyword in a large file.
+* **Level 8:** Finding a unique line of text in a file where every other line is repeated (using `sort` and `uniq -u`).
+* **Level 9:** Extracting human-readable strings from a binary file that start with several equals signs (using the `strings` command).
+* **Level 10:** Decoding data stored in **Base64** format to reveal the password in plain text.
 
 > [!NOTE]
 > I made this repository to save my data and also help others. If you find something wrong, you should Google it—the methods and commands I used can be applied in many different ways!
